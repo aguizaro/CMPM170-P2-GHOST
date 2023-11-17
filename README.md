@@ -4,5 +4,6 @@
 Deployments
 
 Individual: https://aguizaro.github.io/CMPM170-P2-GHOST/?GhostGame
+
 Group: Deployment: https://aguizaro.github.io/CMPM170-P2-GHOST/?GroupGame
 
