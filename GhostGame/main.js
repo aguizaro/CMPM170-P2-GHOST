@@ -109,20 +109,30 @@ const particleSpeed = 4;
 const particleNum = 200;
 const particleColorMain= "yellow";
 const particleColorSecondary = "purple";
-let currentPowerup = {text: "", color: "black"}
+let currentPowerup = { text: "", color: "black" }
+let currentPowerupDisplay;
 
 
 options = {
   viewSize: windowLen,
   theme: "simple",
   isPlayingBgm: false,
-  isReplayEnabled: false
+  isReplayEnabled: false,
 }
 
 score= 0;
 let ghost; 
 let enemies;
 let powerups;
+
+/*
+  Next steps:
+  - currentPowerupDisplay lingers for an extra second after powerup wears off. 
+    This is because it has to wait for the next frame in order to update.
+    Is there a way to delete an element from the scene? before the next frame
+
+  - Collision detection kinda sucks for powerups. Maybe because powerups are rotating? 
+*/
 
 function update() {
   if (!ticks) { //this happens before the first frame
@@ -143,7 +153,7 @@ function update() {
   color("light_blue");
   rect(0,windowLen.y - platformHeight , windowLen.x, platformHeight);
   rect(0, 0, windowLen.x, platformHeight);
-  text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
+  currentPowerupDisplay = text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
 
   color("black");
   if (powerups.invincibility.active) {
@@ -159,9 +169,6 @@ function update() {
   //activate powerups
   playerSpeed = (powerups.speedBoost.active) ? speedLevels[1] : speedLevels[0];
   ghost.takesDamage = (powerups.invincibility.active) ? false : true;
-
-  console.log("player speed: ", playerSpeed);
-  console.log("Takes damage: ", ghost.takesDamage);
 
   if (ghost.flyingUp){
     if (ghost.pos.y > MAX_HEIGHT) ghost.pos.y -= playerSpeed; //fly up
@@ -246,7 +253,7 @@ function update() {
     } //power up collision
     if (powerups.invincibility.body.length) {
       if ((powerups.invincibility.body[0].isColliding.char.a || powerups.invincibility.body[0].isColliding.char.a)) { // colision with invincibility power up
-        text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
+        currentPowerupDisplay = text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
         powerups.invincibility.active = true;
         ghost.takesDamage = false;
         powerups.invincibility.available = false;
@@ -255,7 +262,7 @@ function update() {
         play("laser");
         setTimeout(() => {
           currentPowerup = { text: "", color: "black" };
-          text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
+          currentPowerupDisplay = text(currentPowerup.text, 30, 4, {color: currentPowerup.color});
           powerups.invincibility.active = false;
           ghost.takesDamage = true;
         }, powerupDuration);
