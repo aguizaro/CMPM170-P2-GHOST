@@ -1,9 +1,8 @@
 # CMPM170-P2-GHOST
-[crisp-game-lib](https://github.com/abagames/crisp-game-lib)
+One button game prototypes developed using [crisp-game-lib](https://github.com/abagames/crisp-game-lib).
 
-Deployments
+## Deployments
 
-Individual: https://aguizaro.github.io/CMPM170-P2-GHOST/?GhostGame
-
-Group: Deployment: https://aguizaro.github.io/CMPM170-P2-GHOST/?GroupGame
+Individual: [Ghost Game](https://aguizaro.github.io/CMPM170-P2-GHOST/?GhostGame)
+Group: [Bubble Pop](https://aguizaro.github.io/CMPM170-P2-GHOST/?GroupGame)
 
